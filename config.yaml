@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  namespace: crossplane-system
+  name: provider-do-secret
+type: Opaque
+data:
+  token: dop_v1_561e4383337c0aeb454c6c35e4ee33081bbcce81f5809cf7b287287247bf7ca5
+---
+apiVersion: do.crossplane.io/v1alpha1
+kind: ProviderConfig
+metadata:
+  name: example
+spec:
+  credentials:
+    source: Secret
+    secretRef:
+      namespace: crossplane-system
+      name: provider-do-secret
+      key: token
